@@ -39,17 +39,14 @@ This project implements a multi-label classification system to categorize academ
 To convert the raw academic text into meaningful embeddings, we use **Sentence Transformers**. This method helps to capture semantic meaning more effectively than traditional vectorization techniques like TF-IDF.
 
 1. **Initialize Sentence Transformer Model**
-   ```python
+  
    from sentence_transformers import SentenceTransformer
    model = SentenceTransformer("all-MiniLM-L6-v2")
-````
+
 
 2. **Generate Embeddings**
    Using the model, we transform each academic paper's text into high-quality vector representations, which are used as input features for the classifier.
 
-   ```python
-   embeddings = model.encode(text)
-   ```
 
 ### Multi-Label Classification
 
