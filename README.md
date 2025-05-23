@@ -48,7 +48,7 @@ def encode_batch(texts, batch_size=128):
     return model.encode(texts, show_progress_bar=False, device=device)
 
 
-    multi-label-paper-classification/
+multi-label-paper-classification/
 ├── data/
 │   ├── raw/                  # Original datasets
 │   └── processed/            # Cleaned data
