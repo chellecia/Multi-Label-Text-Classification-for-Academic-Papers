@@ -1,7 +1,7 @@
 
 # 📚 Multi-Label Text Classification for Academic Papers
 
-![Python](https://img.shields.io/badge/Python-3.12+-blue)
+![Python](https://img.shields.io/badge/Python-3.9+-blue)
 ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.0+-orange)
 ![LightGBM](https://img.shields.io/badge/LightGBM-3.3+-yellow)
 ![Transformers](https://img.shields.io/badge/Sentence%20Transformers-2.2+-brightgreen)
