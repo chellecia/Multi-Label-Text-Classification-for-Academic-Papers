@@ -35,11 +35,30 @@ This project implements a multi-label classification system to categorize academ
 ## 🛠️ Technical Implementation
 
 ### Data Preprocessing
-```python
-def clean_text_advanced_english(text):
-    # Remove URLs and emojis
-    text = re.sub(r'http\S+|[\U00010000-\U0010ffff]', '', text)
-    # Advanced cleaning pipeline
-    text = re.sub(r'[^\w\s]', '', text)
-    text = re.sub(r'(.)\1{2,}', r'\1', text)
-    return text.lower().strip()
+
+
+### **Sentence Embeddings**
+Initialize Sentence Transformer
+model = SentenceTransformer("all-MiniLM-L6-v2")
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+model.to(device)
+
+# Batch processing for large datasets
+def encode_batch(texts, batch_size=128):
+    return model.encode(texts, show_progress_bar=False, device=device)
+
+
+    multi-label-paper-classification/
+├── data/
+│   ├── raw/                  # Original datasets
+│   └── processed/            # Cleaned data
+├── models/
+│   ├── trained_models/       # Saved model files
+│   └── embeddings/           # Precomputed embeddings
+├── notebooks/
+│   ├── EDA.ipynb             # Exploratory analysis
+│   └── Modeling.ipynb        # Classification experiments
+├── scripts/
+│   ├── preprocessing.py      # Text cleaning
+│   └── train.py             # Model training
+└── README.md
