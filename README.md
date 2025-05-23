@@ -1,11 +1,12 @@
+
 # 📚 Multi-Label Text Classification for Academic Papers
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Python](https://img.shields.io/badge/Python-3.12+-blue)
 ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.0+-orange)
 ![LightGBM](https://img.shields.io/badge/LightGBM-3.3+-yellow)
 ![Transformers](https://img.shields.io/badge/Sentence%20Transformers-2.2+-brightgreen)
 
-This project implements a multi-label classification system to categorize academic papers into three domains: Information Theory, Computational Linguistics, and Computer Vision.
+This project implements a multi-label classification system to categorize academic papers into three domains: **Information Theory**, **Computational Linguistics**, and **Computer Vision**.
 
 ## 🚀 Key Features
 
@@ -24,41 +25,37 @@ This project implements a multi-label classification system to categorize academ
   - **95% accuracy** on Computational Linguistics
   - **93% balanced accuracy** for Computer Vision
 
-## 📊 Model Performance Summary
-
-| Model               | Information Theory (F1) | Comp. Linguistics (F1) | Computer Vision (F1) |
-|---------------------|-------------------------|------------------------|----------------------|
-| KNN                 | 0.95                   | 0.90                  | 0.94                |
-| Random Forest       | 0.87                   | 0.77                  | 0.91                |
-| **LightGBM**        | **0.94**               | **0.90**              | **0.93**            |
 
 ## 🛠️ Technical Implementation
 
 ### Data Preprocessing
+- Custom text cleaning pipeline to preprocess academic papers.
+- This includes:
+  - Removal of stopwords
+  - Stemming
+  - Handling special characters and formatting inconsistencies
 
+### Sentence Embeddings
+To convert the raw academic text into meaningful embeddings, we use **Sentence Transformers**. This method helps to capture semantic meaning more effectively than traditional vectorization techniques like TF-IDF.
 
-### **Sentence Embeddings**
-Initialize Sentence Transformer
-model = SentenceTransformer("all-MiniLM-L6-v2")
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-model.to(device)
+1. **Initialize Sentence Transformer Model**
+   ```python
+   from sentence_transformers import SentenceTransformer
+   model = SentenceTransformer("all-MiniLM-L6-v2")
+````
 
-# Batch processing for large datasets
-def encode_batch(texts, batch_size=128):
-    return model.encode(texts, show_progress_bar=False, device=device)
+2. **Generate Embeddings**
+   Using the model, we transform each academic paper's text into high-quality vector representations, which are used as input features for the classifier.
 
+   ```python
+   embeddings = model.encode(text)
+   ```
 
-multi-label-paper-classification/
-├── data/
-│   ├── raw/                  # Original datasets
-│   └── processed/            # Cleaned data
-├── models/
-│   ├── trained_models/       # Saved model files
-│   └── embeddings/           # Precomputed embeddings
-├── notebooks/
-│   ├── EDA.ipynb             # Exploratory analysis
-│   └── Modeling.ipynb        # Classification experiments
-├── scripts/
-│   ├── preprocessing.py      # Text cleaning
-│   └── train.py             # Model training
-└── README.md
+### Multi-Label Classification
+
+The project evaluates different machine learning classifiers (KNN, Random Forest, LightGBM) for multi-label classification, where each academic paper can belong to multiple categories. These classifiers are compared based on their F1-score for each domain.
+
+* **KNN (K-Nearest Neighbors)**: A simple yet effective method for multi-label classification.
+* **Random Forest**: An ensemble method providing robust classification with better handling of imbalanced data.
+* **LightGBM**: A gradient boosting model that achieved the highest performance across all domains.
+
